@@ -10,4 +10,5 @@ jobs:
       - name: check
         run: |
           if [ -f FAIL ]; then echo "FAIL file present"; exit 1; fi
+          if [ "${{ github.event_name }}" = merge_group ] && [ -f FAILQ ]; then echo "FAILQ: fails only in the merge queue"; exit 1; fi
           if [ "${{ github.event_name }}" = merge_group ]; then sleep 180; fi
